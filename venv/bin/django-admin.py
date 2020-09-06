@@ -1,4 +1,4 @@
-#!/home/alex/Documents/dev/Enigma/venv/bin/python
+#!/home/coco/Github/Enigma/venv/bin/python3
 # When the django-admin.py deprecation ends, remove this script.
 import warnings
 

@@ -1,4 +1,4 @@
-#!/home/alex/Documents/dev/Enigma/venv/bin/python
+#!/home/coco/Github/Enigma/venv/bin/python3
 # -*- coding: utf-8 -*-
 import re
 import sys

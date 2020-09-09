@@ -22,6 +22,7 @@ from game import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     url(r'^suspect/', views.SuspectList.as_view()),
+    url(r'^record/', views.RecordList.as_view()),
     url(r'^api-auth/', include('rest_framework.urls'))
 
 ]

@@ -55,17 +55,17 @@ class Suspect(models.Model):
 
 class Investigation(models.Model):
     examination = models.ForeignKey(Suspect, default=None, on_delete=models.CASCADE)
-    Questons1 = models.CharField(max_length=500, default=None)
+    Question1 = models.CharField(max_length=500, default=None)
     Response1 = models.CharField(max_length=500, default=None)
-    Questons2 = models.CharField(max_length=500, default=None)
+    Question2 = models.CharField(max_length=500, default=None)
     Response2 = models.CharField(max_length=500, default=None)
-    Questons3 = models.CharField(max_length=500, default=None)
+    Question3 = models.CharField(max_length=500, default=None)
     Response3 = models.CharField(max_length=500, default=None)
-    Questons4 = models.CharField(max_length=500, default=None)
+    Question4 = models.CharField(max_length=500, default=None)
     Response4 = models.CharField(max_length=500, default=None)
-    Questons5 = models.CharField(max_length=500, default=None)
+    Question5 = models.CharField(max_length=500, default=None)
     Response5 = models.CharField(max_length=500, default=None)
-    Questons6 = models.CharField(max_length=500, default=None)
+    Question6 = models.CharField(max_length=500, default=None)
     Response6 = models.CharField(max_length=500, default=None)
 
     # def __str__(self):
@@ -85,7 +85,7 @@ class Record(models.Model):
 class Crime_details(models.Model):
     crime_id = models.IntegerField(primary_key=True, default=None)
     quest_id = models.ForeignKey(Quest, default=None, on_delete=models.CASCADE)
-    victim_id = models.ForeignKey(Victim, on_delete=models.CASCADE, default=None)
+    victim_id = models.ForeignKey(Victim, default=None, on_delete=models.CASCADE)
     estimated_date = models.IntegerField(default=None)
     nature = models.CharField(max_length=30, default=None)
     weapon_used = models.CharField(max_length=30, default=None)

@@ -17,11 +17,16 @@ from django.conf.urls import url
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework.urlpatterns import format_suffix_patterns
+
 from game import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    url(r'^suspect/<int:id>/', views.SuspectDetail.as_view()),
     url(r'^suspect/', views.SuspectList.as_view()),
+    url(r'^victim/<int:id>/', views.VictimDetail.as_view()),
+    url(r'^victim/', views.VictimList.as_view()),
     url(r'^api-auth/', include('rest_framework.urls'))
 
 ]
+urlpatterns = format_suffix_patterns(urlpatterns)

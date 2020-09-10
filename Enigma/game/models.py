@@ -6,18 +6,18 @@ class Quest(models.Model):
     id = models.IntegerField(primary_key=True, default=None)
     title = models.CharField(max_length=30, default=None)
 
-    # def __str__(self):
-    #     return self.id + ' ' + self.title
+    def __str__(self):
+        return self.id + ' ' + self.title
 
 
 class Victim(models.Model):
     id = models.IntegerField(primary_key=True, default=None)
-    name = models.CharField(max_length=30, default=None)
-    description = models.CharField(max_length=100, default=None)
+    first_name = models.CharField(max_length=30, default=None)
+    last_name = models.CharField(max_length=30, default=None)
     autopsia = models.CharField(max_length=100, default=None)
     gender = models.CharField(max_length=10, default=None)
     age = models.IntegerField(default=None)
-    skin_color = models.CharField(max_length=15, default=None)
+    ethnic_group = models.CharField(max_length=15, default=None)
     height = models.IntegerField(default=None)
     hair_color = models.CharField(max_length=15, default=None)
     eye_color = models.CharField(max_length=15, default=None)
@@ -26,13 +26,16 @@ class Victim(models.Model):
     income = models.IntegerField(default=None)
     insurance_owner = models.BooleanField(default=None)
 
-    # def __str__(self):
-    #     return self.id + self.name + self.description + self.autopsia
+    def __str__(self):
+        return self.id + self.first_name + self.last_name + self.autopsia + self.gender + self.age + self.ethnic_group + self.height + self.hair_color + self.eye_color + self.profession + self.resident + self.income + self.insurance_owner
 
 
 class Insurance(models.Model):
     victim_insurance = models.ForeignKey(Victim, default=None, on_delete=models.CASCADE)
     value = models.IntegerField(default=None)
+
+    def __str__(self):
+        return self.value + self.victim_insurance
 
 
 class Suspect(models.Model):
@@ -41,16 +44,20 @@ class Suspect(models.Model):
     last_name = models.CharField(max_length=30, default=None)
     gender = models.CharField(max_length=10, default=None)
     age = models.IntegerField(default=None)
-    skin_color = models.CharField(max_length=15, default=None)
+    ethnic_group = models.CharField(max_length=15, default=None)
     height = models.IntegerField(default=None)
     hair_color = models.CharField(max_length=15, default=None)
     eye_color = models.CharField(max_length=15, default=None)
     profession = models.CharField(max_length=30, default=None)
     resident = models.CharField(max_length=30, default=None)
+    income = models.IntegerField(default=None)
     bound_with_victim = models.ForeignKey(Victim, default=None, on_delete=models.CASCADE)
 
-    # def __str__(self):
-    #     return self.id + self.first_name + ' ' + self.last_name + + self.sexe + self.age + self.profession + self.resident + self.bound_with_victim
+    def __str__(self):
+        return self.id + self.first_name + ' ' + self.last_name + self.gender + self.age + self.ethnic_group + self.height + self.hair_color + self.eye_color + self.profession + self.resident + self.bound_with_victim
+
+    class Meta:
+        ordering = ['id']
 
 
 class Investigation(models.Model):
@@ -68,8 +75,8 @@ class Investigation(models.Model):
     Question6 = models.CharField(max_length=500, default=None)
     Response6 = models.CharField(max_length=500, default=None)
 
-    # def __str__(self):
-    #     return self.examination
+    def __str__(self):
+        return self.examination
 
 
 class Record(models.Model):
@@ -78,11 +85,11 @@ class Record(models.Model):
     antecedent = models.CharField(max_length=100, default=None)
     investigation = models.ForeignKey(Investigation, default=None, on_delete=models.CASCADE)
 
-    # def __str__(self):
-    #     return self.suspect + self.antecedent + self.investigation
+    def __str__(self):
+        return self.id + self.suspect_id + self.antecedent + self.investigation
 
 
-class Crime_details(models.Model):
+class Crime_detail(models.Model):
     crime_id = models.IntegerField(primary_key=True, default=None)
     quest_id = models.ForeignKey(Quest, default=None, on_delete=models.CASCADE)
     victim_id = models.ForeignKey(Victim, default=None, on_delete=models.CASCADE)
@@ -92,16 +99,16 @@ class Crime_details(models.Model):
     autopsia = models.CharField(max_length=100, default=None)
     optional_clues = models.CharField(max_length=100, default=None)
 
-    # def __str__(self):
-    #     return self.details + self.estimated_date + self.estimated_date + self.nature + self.weapon_used + self.autopsia + self.optional_clues
+    def __str__(self):
+        return self.crime_id + self.quest_id + self.victim_id + self.estimated_date + self.nature + self.weapon_used + self.autopsia + self.optional_clues
 
 
 class Crime_location(models.Model):
-    crime = models.ForeignKey(Crime_details, default=None, on_delete=models.CASCADE)
+    crime = models.ForeignKey(Crime_detail, default=None, on_delete=models.CASCADE)
     country = models.CharField(max_length=30, default=None)
     town = models.CharField(max_length=30, default=None)
     house = models.CharField(max_length=30, default=None)
     room = models.CharField(max_length=30, default=None)
 
-    # def __str__(self):
-    #     return self.location + self.country + self.town + self.house + self.room
+    def __str__(self):
+        return self.crime + self.country + self.town + self.house + self.room

@@ -6,7 +6,7 @@ from Enigma.game.models import Victim
 from Enigma.game.serializers import VictimSerializer
 
 '''
-Old version of the views
+Old version of the views, intresting to understand the api=>data interaction process
 '''
 
 @api_view(['GET', 'POST'])

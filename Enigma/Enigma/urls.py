@@ -20,13 +20,21 @@ from rest_framework.urlpatterns import format_suffix_patterns
 
 from game import views
 
+####views.py
 urlpatterns = [
     path('admin/', admin.site.urls),
-    url(r'^suspect/<int:id>/', views.SuspectDetail.as_view()),
-    url(r'^suspect/', views.SuspectList.as_view()),
-    url(r'^victim/<int:id>/', views.VictimDetail.as_view()),
-    url(r'^victim/', views.VictimList.as_view()),
-    url(r'^api-auth/', include('rest_framework.urls'))
-
+    path('api/suspect/<int:id>/', views.SuspectDetail.as_view()),
+    path('api/suspects/', views.SuspectList.as_view()),
+    path('api/victim/<int:id>/', views.VictimDetail.as_view()),
+    path('api/victims/', views.VictimList.as_view()),
 ]
-urlpatterns = format_suffix_patterns(urlpatterns)
+####views2.py
+# urlpatterns = [
+#     path('admin/', admin.site.urls),
+#     path('api/victims/', views2.Victim_list),
+#     path('api/victim/<int:id>/', views2.Victim_detail),
+# ]
+urlpatterns += [
+    path('api-auth/', include('rest_framework.urls')),
+]
+# urlpatterns = format_suffix_patterns(urlpatterns)

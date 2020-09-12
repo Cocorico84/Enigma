@@ -1,17 +1,42 @@
+from django.contrib.auth.models import User
 from django.shortcuts import render
 
 from django.http import HttpResponse, JsonResponse, Http404
 from django.shortcuts import get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
+from rest_framework.authentication import TokenAuthentication
 from rest_framework.parsers import JSONParser
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework import status, permissions, authentication
+from rest_framework import status, permissions, authentication, generics
 from .models import Suspect, Victim
 from .serializers import SuspectSerializer, VictimSerializer
 
 
+# class UserList(generics.ListAPIView):
+#     queryset = User.objects.all()
+#     serializer_class = UserSerializer
+#
+#
+# class UserDetail(generics.RetrieveAPIView):
+#     queryset = User.objects.all()
+#     serializer_class = UserSerializer
+
+# class SnippetList(generics.ListCreateAPIView):
+#     queryset = Snippet.objects.all()
+#     serializer_class = SnippetSerializer
+#
+#     def perform_create(self, serializer):
+#         serializer.save(owner=self.request.user)
+#
+# class SnippetDetail(generics.RetrieveUpdateDestroyAPIView):
+#     queryset = Snippet.objects.all()
+#     serializer_class = SnippetSerializer
 class SuspectDetail(APIView):
+    # authentication_classes = [authentication.TokenAuthentication]
+    # permission_classes = [permissions.IsAdminUser]
+    # permission_classes = [permissions.IsAuthenticated]
     def get_suspect(self, id):
         try:
             return Suspect.objects.get(id=id)
@@ -38,8 +63,8 @@ class SuspectDetail(APIView):
 
 
 class SuspectList(APIView):
-    # authentication_classes = [authentication.TokenAuthentication]
-    # permission_classes = [permissions.IsAdminUser]
+    authentication_classes = (TokenAuthentication)
+    permission_classes = (IsAuthenticated)
 
     def get(self, request, format=None):
         suspect = Suspect.objects.all()
@@ -55,6 +80,8 @@ class SuspectList(APIView):
 
 
 class VictimDetail(APIView):
+    # authentication_classes = [authentication.TokenAuthentication]
+    # permission_classes = [permissions.IsAdminUser]
     def get_victim(self, id):
         try:
             return Victim.objects.get(id=id)

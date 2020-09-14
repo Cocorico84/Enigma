@@ -19,25 +19,24 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework.urlpatterns import format_suffix_patterns
 from rest_framework.authtoken import views as tokenviews
-from game.templates.registration import views as registrationviews
 
 from game import views
 
+"""
+The commented path allow to have the library django.contrib.auth way to authenticate
+"""
 urlpatterns = [
-    # path('admin/', admin.site.urls),
     path('api/suspect/<int:id>/', views.SuspectDetail.as_view()),
     path('api/suspects/', views.SuspectList.as_view()),
     path('api/victim/<int:id>/', views.VictimDetail.as_view()),
     path('api/victims/', views.VictimList.as_view()),
     path('api-token-auth/', tokenviews.obtain_auth_token),
-    path('', include('django.contrib.auth.urls')),
-    path('register/', registrationviews.register),
-    # path('logout/', loginviews.auth_logout),
+    path('registrate/', views.RegisterPage, name='registrate'),
+    path('login/', views.LoginPage, name='login'),
+    path('logout/', views.LoggedOutUser, name='logout'),
+    path('home/', views.home, name='home'),
+    # path('', include('django.contrib.auth.urls')),
 
-    # path('users/', views.UserList.as_view()),
-    # path('user/<int:id>/', views.UserDetail.as_view()),
-    # path('snippets/', views.SnippetList.as_view()),
-    # path('snippets/<int:pk>/', views.SnippetDetail.as_view())
 ]
 ####views2.py
 # urlpatterns = [

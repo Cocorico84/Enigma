@@ -6,8 +6,10 @@ from django.shortcuts import render, redirect
 
 from django.http import HttpResponse, JsonResponse, Http404
 from django.shortcuts import get_object_or_404
-from django.views.decorators.csrf import csrf_exempt
+from django.template import RequestContext
+from django.views.decorators.csrf import csrf_exempt, csrf_protect
 from rest_framework.authentication import TokenAuthentication
+from rest_framework.decorators import authentication_classes, permission_classes
 from rest_framework.parsers import JSONParser
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
@@ -19,6 +21,10 @@ from .models import Suspect, Victim
 from .serializers import SuspectSerializer, VictimSerializer
 from django.contrib.auth.forms import UserCreationForm
 
+'''
+UserCreationForm is sdt django authentication system, on the contrary CreateUserForm is a customizable
+'''
+
 
 @login_required(login_url='login')
 def home(request):
@@ -27,7 +33,7 @@ def home(request):
 
 def RegisterPage(request):
     # form = UserCreationForm()
-    if request.user.is_authenticated():
+    if request.user.is_authenticated:
         return redirect('home')
     else:
         form = CreateUserForm()
@@ -41,21 +47,21 @@ def RegisterPage(request):
         return render(request, "registrate.html", context)
 
 
+@csrf_protect
 def LoginPage(request):
-    if request.user.is_authenticated():
+    if request.user.is_authenticated:
         return redirect('home')
     else:
         if request.method == "POST":
-            username = request.POST.get('username')
-            password = request.POST.get('password')
+            username = request.POST['username']
+            password = request.POST['password']
             user = authenticate(request, username=username, password=password)
             if user is not None:
-                login(request, username)
+                login(request, user)
                 return redirect('home')
             else:
                 messages.info(request, "Username or Password incorrect")
-        context = {}
-        return render(request, 'login.html', context)
+        return render(request, "login.html")
 
 
 def LoggedOutUser(request):
@@ -64,9 +70,9 @@ def LoggedOutUser(request):
 
 
 class SuspectDetail(APIView):
-    # authentication_classes = [authentication.TokenAuthentication]
-    # permission_classes = [permissions.IsAdminUser]
-    # permission_classes = [permissions.IsAuthenticated]
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
     def get_suspect(self, id):
         try:
             return Suspect.objects.get(id=id)
@@ -93,8 +99,8 @@ class SuspectDetail(APIView):
 
 
 class SuspectList(APIView):
-    # authentication_classes = (TokenAuthentication)
-    # permission_classes = (IsAuthenticated)
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
 
     def get(self, request, format=None):
         suspect = Suspect.objects.all()
@@ -110,8 +116,9 @@ class SuspectList(APIView):
 
 
 class VictimDetail(APIView):
-    # authentication_classes = [authentication.TokenAuthentication]
-    # permission_classes = [permissions.IsAdminUser]
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
     def get_victim(self, id):
         try:
             return Victim.objects.get(id=id)
@@ -138,10 +145,18 @@ class VictimDetail(APIView):
 
 
 class VictimList(APIView):
-    # authentication_classes = [authentication.TokenAuthentication]
-    # permission_classes = [permissions.IsAdminUser]
+    permission_classes = [IsAuthenticated]
+
+    authentication_classes = [TokenAuthentication]
 
     def get(self, request):
         victim = Victim.objects.all()
         serializer = SuspectSerializer(victim, many=True)
         return Response(serializer.data)
+
+    def post(self, request, format=None):
+        serializer = VictimSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

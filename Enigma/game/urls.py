@@ -16,6 +16,7 @@ Including another URLconf
 import rest_framework
 from django.conf.urls import url
 from django.contrib import admin
+from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import path, include
 from rest_framework.urlpatterns import format_suffix_patterns
 from rest_framework.authtoken import views as tokenviews
@@ -30,7 +31,7 @@ urlpatterns = [
     path('api/suspects/', views.SuspectList.as_view()),
     path('api/victim/<int:id>/', views.VictimDetail.as_view()),
     path('api/victims/', views.VictimList.as_view()),
-    path('api-token-auth/', tokenviews.obtain_auth_token),
+    path('api-token-auth/', tokenviews.obtain_auth_token,name="api-token-auth"),
     path('registrate/', views.RegisterPage, name='registrate'),
     path('login/', views.LoginPage, name='login'),
     path('logout/', views.LoggedOutUser, name='logout'),
@@ -44,7 +45,7 @@ urlpatterns = [
 #     path('api/victims/', views2.Victim_list),
 #     path('api/victim/<int:id>/', views2.Victim_detail),
 # ]
-urlpatterns += [
-    path('api-auth/', include('rest_framework.urls')),
-]
+# urlpatterns += [
+#     path('api-auth/', include('rest_framework.urls')),
+# ]
 # urlpatterns = format_suffix_patterns(urlpatterns)

@@ -39,16 +39,15 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'game',
     'rest_framework.authtoken',
-    'crispy_forms',
-
 ]
 REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAuthenticated',
-    ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
         'rest_framework.authentication.SessionAuthentication',
     ),
+    'DEFAULT_PERMISSIONS_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated'
+    )
 }
 
 MIDDLEWARE = [

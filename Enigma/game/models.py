@@ -1,4 +1,3 @@
-from django.contrib.auth.models import User
 from django.db import models
 
 """
@@ -9,6 +8,7 @@ windows shell delete commands
 del path/db.sqlite3
 del path/migrations/migration_file
 """
+
 
 # Create your models here.
 
@@ -37,10 +37,11 @@ class Victim(models.Model):
     insurance_owner = models.BooleanField(default=None)
 
     def __str__(self):
-        return self.owner+self.id + self.first_name + self.last_name + self.autopsia + self.gender + self.age + self.ethnic_group + self.height + self.hair_color + self.eye_color + self.profession + self.resident + self.income + self.insurance_owner
+        return self.id + self.first_name + self.last_name + self.autopsia + self.gender + self.age + self.ethnic_group + self.height + self.hair_color + self.eye_color + self.profession + self.resident + self.income + self.insurance_owner
 
     class Meta:
-        ordering = ['id']
+        ordering = ["id"]
+
 
 class Insurance(models.Model):
     victim_insurance = models.ForeignKey(Victim, default=None, on_delete=models.CASCADE)

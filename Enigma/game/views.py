@@ -1,25 +1,18 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 
-from django.http import HttpResponse, JsonResponse, Http404
-from django.shortcuts import get_object_or_404
-from django.template import RequestContext
-from django.views.decorators.csrf import csrf_exempt, csrf_protect
-from rest_framework.authentication import TokenAuthentication
-from rest_framework.decorators import authentication_classes, permission_classes
-from rest_framework.parsers import JSONParser
-from rest_framework.permissions import IsAuthenticated
+from django.http import Http404
+from django.views.decorators.csrf import csrf_protect
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework import status, permissions, authentication, generics
+from rest_framework import status
 
 from .forms import CreateUserForm
 from .models import Suspect, Victim
 from .serializers import SuspectSerializer, VictimSerializer
-from django.contrib.auth.forms import UserCreationForm
 
 '''
 UserCreationForm is sdt django authentication system, on the contrary CreateUserForm is a customizable
@@ -70,8 +63,8 @@ def LoggedOutUser(request):
 
 
 class SuspectDetail(APIView):
-    authentication_classes = [TokenAuthentication]
-    permission_classes = [IsAuthenticated]
+    # authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated, IsAdminUser]
 
     def get_suspect(self, id):
         try:
@@ -99,8 +92,8 @@ class SuspectDetail(APIView):
 
 
 class SuspectList(APIView):
-    authentication_classes = [TokenAuthentication]
-    permission_classes = [IsAuthenticated]
+    # authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated, IsAdminUser]
 
     def get(self, request, format=None):
         suspect = Suspect.objects.all()
@@ -116,8 +109,8 @@ class SuspectList(APIView):
 
 
 class VictimDetail(APIView):
-    authentication_classes = [TokenAuthentication]
-    permission_classes = [IsAuthenticated]
+    # authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated, IsAdminUser]
 
     def get_victim(self, id):
         try:
@@ -145,14 +138,13 @@ class VictimDetail(APIView):
 
 
 class VictimList(APIView):
-    permission_classes = [IsAuthenticated]
-
-    authentication_classes = [TokenAuthentication]
+    # authentication_classes = [TokenAuthentication,]
+    permission_classes = [IsAuthenticated, IsAdminUser]
 
     def get(self, request):
         victim = Victim.objects.all()
         serializer = SuspectSerializer(victim, many=True)
-        return Response(serializer.data)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
     def post(self, request, format=None):
         serializer = VictimSerializer(data=request.data)

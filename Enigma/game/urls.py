@@ -13,15 +13,10 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-import rest_framework
-from django.conf.urls import url
-from django.contrib import admin
-from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import path, include
-from rest_framework.urlpatterns import format_suffix_patterns
 from rest_framework.authtoken import views as tokenviews
 
-from game import views
+from game import views,views2
 
 """
 The commented path allow to have the library django.contrib.auth way to authenticate
@@ -29,8 +24,10 @@ The commented path allow to have the library django.contrib.auth way to authenti
 urlpatterns = [
     path('api/suspect/<int:id>/', views.SuspectDetail.as_view()),
     path('api/suspects/', views.SuspectList.as_view()),
+    path('api/filtered_suspects/', views2.SuspectList.as_view()),
     path('api/victim/<int:id>/', views.VictimDetail.as_view()),
     path('api/victims/', views.VictimList.as_view()),
+    path('api/filtered_victims/', views2.VictimList.as_view()),
     path('api-token-auth/', tokenviews.obtain_auth_token,name="api-token-auth"),
     path('registrate/', views.RegisterPage, name='registrate'),
     path('login/', views.LoginPage, name='login'),

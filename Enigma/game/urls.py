@@ -16,7 +16,7 @@ Including another URLconf
 from django.urls import path, include
 from rest_framework.authtoken import views as tokenviews
 
-from game import views,views2
+from game import views, views2
 
 """
 The commented path allow to have the library django.contrib.auth way to authenticate
@@ -28,7 +28,7 @@ urlpatterns = [
     path('api/victim/<int:id>/', views.VictimDetail.as_view()),
     path('api/victims/', views.VictimList.as_view()),
     path('api/filtered_victims/', views2.VictimList.as_view()),
-    path('api-token-auth/', tokenviews.obtain_auth_token,name="api-token-auth"),
+    path('api-token-auth/', tokenviews.obtain_auth_token, name="api-token-auth"),
     path('registrate/', views.RegisterPage, name='registrate'),
     path('login/', views.LoginPage, name='login'),
     path('logout/', views.LoggedOutUser, name='logout'),

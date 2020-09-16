@@ -5,6 +5,7 @@ from django.shortcuts import render, redirect
 
 from django.http import Http404
 from django.views.decorators.csrf import csrf_protect
+from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.views import APIView
 from rest_framework.response import Response

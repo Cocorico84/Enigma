@@ -26,6 +26,7 @@ SECRET_KEY = 'ieik4!#cit)k6h4^d$mc_hl2x_)3ve_gdjs!e+vmlm@a@y&y&2'
 DEBUG = True
 
 ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = ['localhost']
 
 # Application definition
 
@@ -39,15 +40,18 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'game',
     'rest_framework.authtoken',
-    'crispy_forms',
-
+    'django_filters',
 ]
 REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAuthenticated',
-    ),
+
     'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.TokenAuthentication',
         'rest_framework.authentication.SessionAuthentication',
+    ),
+    'DEFAULT_PERMISSIONS_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+        'rest_framework.permissions.IsAdminUser',
     ),
 }
 
@@ -125,4 +129,4 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 STATIC_URL = '/static/'
-LOGIN_URL = '/login/'
+# LOGIN_URL = '/login/'

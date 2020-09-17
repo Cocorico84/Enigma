@@ -1,42 +1,72 @@
-from django.contrib.auth.models import User
-from django.shortcuts import render
+from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect
 
-from django.http import HttpResponse, JsonResponse, Http404
-from django.shortcuts import get_object_or_404
-from django.views.decorators.csrf import csrf_exempt
+from django.http import Http404
+from django.views.decorators.csrf import csrf_protect
 from rest_framework.authentication import TokenAuthentication
-from rest_framework.parsers import JSONParser
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework import status, permissions, authentication, generics
+from rest_framework import status
+
+from .forms import CreateUserForm
 from .models import Suspect, Victim
 from .serializers import SuspectSerializer, VictimSerializer
 
+'''
+UserCreationForm is sdt django authentication system, on the contrary CreateUserForm is a customizable
+'''
 
-# class UserList(generics.ListAPIView):
-#     queryset = User.objects.all()
-#     serializer_class = UserSerializer
-#
-#
-# class UserDetail(generics.RetrieveAPIView):
-#     queryset = User.objects.all()
-#     serializer_class = UserSerializer
 
-# class SnippetList(generics.ListCreateAPIView):
-#     queryset = Snippet.objects.all()
-#     serializer_class = SnippetSerializer
-#
-#     def perform_create(self, serializer):
-#         serializer.save(owner=self.request.user)
-#
-# class SnippetDetail(generics.RetrieveUpdateDestroyAPIView):
-#     queryset = Snippet.objects.all()
-#     serializer_class = SnippetSerializer
+@login_required(login_url='login')
+def home(request):
+    return render(request, 'home.html')
+
+
+def RegisterPage(request):
+    # form = UserCreationForm()
+    if request.user.is_authenticated:
+        return redirect('home')
+    else:
+        form = CreateUserForm()
+        if request.method == "POST":
+            if form.is_valid():
+                form.save()
+                user = form.cleaned_data.get('username')
+                messages.success(request, "Congrats, Account created for: " + user)
+                return redirect('login')
+        context = {'form': form}
+        return render(request, "registrate.html", context)
+
+
+@csrf_protect
+def LoginPage(request):
+    if request.user.is_authenticated:
+        return redirect('home')
+    else:
+        if request.method == "POST":
+            username = request.POST['username']
+            password = request.POST['password']
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('home')
+            else:
+                messages.info(request, "Username or Password incorrect")
+        return render(request, "login.html")
+
+
+def LoggedOutUser(request):
+    logout(request)
+    return redirect('login')
+
+
 class SuspectDetail(APIView):
-    # authentication_classes = [authentication.TokenAuthentication]
-    # permission_classes = [permissions.IsAdminUser]
-    # permission_classes = [permissions.IsAuthenticated]
+    # authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated, IsAdminUser]
+
     def get_suspect(self, id):
         try:
             return Suspect.objects.get(id=id)
@@ -63,8 +93,8 @@ class SuspectDetail(APIView):
 
 
 class SuspectList(APIView):
-    authentication_classes = (TokenAuthentication)
-    permission_classes = (IsAuthenticated)
+    # authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated, IsAdminUser]
 
     def get(self, request, format=None):
         suspect = Suspect.objects.all()
@@ -80,8 +110,9 @@ class SuspectList(APIView):
 
 
 class VictimDetail(APIView):
-    # authentication_classes = [authentication.TokenAuthentication]
-    # permission_classes = [permissions.IsAdminUser]
+    # authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated, IsAdminUser]
+
     def get_victim(self, id):
         try:
             return Victim.objects.get(id=id)
@@ -108,10 +139,17 @@ class VictimDetail(APIView):
 
 
 class VictimList(APIView):
-    # authentication_classes = [authentication.TokenAuthentication]
-    # permission_classes = [permissions.IsAdminUser]
+    # authentication_classes = [TokenAuthentication,]
+    permission_classes = [IsAuthenticated, IsAdminUser]
 
     def get(self, request):
         victim = Victim.objects.all()
         serializer = SuspectSerializer(victim, many=True)
-        return Response(serializer.data)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    def post(self, request, format=None):
+        serializer = VictimSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

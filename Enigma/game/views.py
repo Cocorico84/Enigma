@@ -25,20 +25,37 @@ def home(request):
     return render(request, 'home.html')
 
 
+@login_required(login_url='login')
+def archives(request):
+    return render(request, "api.html")
+
+
+# def RegisterPage(request):
+#     # form = UserCreationForm()
+#     if request.user.is_authenticated:
+#         return redirect('home')
+#     else:
+#         form = CreateUserForm()
+#         if request.method == "POST":
+#             if form.is_valid():
+#                 form.save()
+#                 user = form.cleaned_data.get('username')
+#                 messages.success(request, "Congrats, Account created for: " + user)
+#                 return redirect('login')
+#         context = {'form': form}
+#         return render(request, "registrate.html", context)
+
 def RegisterPage(request):
-    # form = UserCreationForm()
-    if request.user.is_authenticated:
-        return redirect('home')
+    if request.method == "POST":
+        form = CreateUserForm(request.POST)
+        if form.is_valid():
+            form.save()
+            user = form.cleaned_data.get('username')
+            messages.success(request, "Congrats, Account created for: " + user)
+            return redirect('login')
     else:
-        form = CreateUserForm()
-        if request.method == "POST":
-            if form.is_valid():
-                form.save()
-                user = form.cleaned_data.get('username')
-                messages.success(request, "Congrats, Account created for: " + user)
-                return redirect('login')
-        context = {'form': form}
-        return render(request, "registrate.html", context)
+        form = CreateUserForm
+    return render(request, "registrate.html", {'form': form})
 
 
 @csrf_protect

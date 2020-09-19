@@ -1,7 +1,8 @@
+{%load static%}
+
 .bg-image {
   /* The image used */
-  background-image: url("forest.jpg");
-
+  background-image: url("http://127.0.0.1:8000/images/dark_bridge.jpg");
   /* Add the blur effect */
   filter: blur(8px);
   -webkit-filter: blur(8px);

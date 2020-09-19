@@ -4,9 +4,12 @@ from django.urls import path, include
 from django.contrib import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
+from Enigma import views
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('Enigma/', include('game.urls')),
+    path('Enigma/', views.Enigma),
 ]
 
 # urlpatterns += staticfiles_urlpatterns()

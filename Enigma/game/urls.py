@@ -13,6 +13,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf import settings
 from django.urls import path, include
 from rest_framework.authtoken import views as tokenviews
 
@@ -22,6 +23,7 @@ from game import views, views2
 The commented path allow to have the library django.contrib.auth way to authenticate
 """
 urlpatterns = [
+    path('api/', views.archives, name='TheCircle'),
     path('api/suspect/<int:id>/', views.SuspectDetail.as_view()),
     path('api/suspects/', views.SuspectList.as_view()),
     path('api/filtered_suspects/', views2.SuspectList.as_view()),
@@ -36,6 +38,7 @@ urlpatterns = [
     # path('', include('django.contrib.auth.urls')),
 
 ]
+
 ####views2.py
 # urlpatterns = [
 #     path('admin/', admin.site.urls),

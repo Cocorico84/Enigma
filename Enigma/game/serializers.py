@@ -12,7 +12,7 @@ class InsuranceSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         """
-        Create and return a new `Mercenaries` instance, given the validated data.
+        Create and return a new `Insurance` instance, given the validated data.
         """
         return Insurance.objects.create(**validated_data)
 
@@ -31,7 +31,7 @@ class CluesSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         """
-        Create and return a new `Mercenaries` instance, given the validated data.
+        Create and return a new `Clues` instance, given the validated data.
         """
         return Clues.objects.create(**validated_data)
 
@@ -50,7 +50,7 @@ class Crime_locationSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         """
-        Create and return a new `Mercenaries` instance, given the validated data.
+        Create and return a new `Crime_location` instance, given the validated data.
         """
         return Crime_location.objects.create(**validated_data)
 
@@ -69,7 +69,7 @@ class Crime_detailsSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         """
-        Create and return a new `Mercenaries` instance, given the validated data.
+        Create and return a new `Crime_details` instance, given the validated data.
         """
         return Crime_details.objects.create(**validated_data)
 
@@ -91,7 +91,7 @@ class RecordSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         """
-        Create and return a new `Mercenaries` instance, given the validated data.
+        Create and return a new `Record` instance, given the validated data.
         """
         return Prisoners.objects.create(**validated_data)
 
@@ -110,7 +110,7 @@ class PrisonersSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         """
-        Create and return a new `Mercenaries` instance, given the validated data.
+        Create and return a new `Prisoners` instance, given the validated data.
         """
         return Prisoners.objects.create(**validated_data)
 
@@ -129,7 +129,7 @@ class KilledSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         """
-        Create and return a new `Mercenaries` instance, given the validated data.
+        Create and return a new `Killed` instance, given the validated data.
         """
         return Killed.objects.create(**validated_data)
 
@@ -148,7 +148,7 @@ class QuestSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         """
-        Create and return a new `Mercenaries` instance, given the validated data.
+        Create and return a new `Quest` instance, given the validated data.
         """
         return Quest.objects.create(**validated_data)
 
@@ -166,7 +166,7 @@ class DetectiveSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         """
-        Create and return a new `Mercenaries` instance, given the validated data.
+        Create and return a new `Detective` instance, given the validated data.
         """
         return Detective.objects.create(**validated_data)
 
@@ -195,6 +195,7 @@ class MercenariesSerializer(serializers.ModelSerializer):
         Mercenaries.first_name = validated_data.get('first_name', Mercenaries.first_name)
         Mercenaries.last_name = validated_data.get('last_name', Mercenaries.last_name)
         Mercenaries.age = validated_data.get('age', Mercenaries.age)
+        Mercenaries.gender = validated_data.get('gender', Mercenaries.gender)
         Mercenaries.cost = validated_data.get('cost', Mercenaries.cost)
         Mercenaries.number_of_actions = validated_data('number_of_actions', Mercenaries.number_of_actions)
         Mercenaries.save()
@@ -215,13 +216,13 @@ class VictimSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         """
-        Create and return a new `Suspect` instance, given the validated data.
+        Create and return a new `Victim` instance, given the validated data.
         """
         return Victim.objects.create(**validated_data)
 
     def update(self, Victim, validated_data):
         """
-        Update and return an existing `Suspect` instance, given the validated data.
+        Update and return an existing `Victim` instance, given the validated data.
         """
         Victim.id = validated_data.get('id', Victim.id)
         Victim.first_name = validated_data.get('first_name', Victim.first_name)

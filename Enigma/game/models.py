@@ -16,11 +16,12 @@ class Mercenaries(models.Model):
     first_name = models.CharField(max_length=30, default=None)
     last_name = models.CharField(max_length=30, default=None)
     age = models.IntegerField(default=None)
+    gender = models.CharField(max_length=10, default=None)
     cost = models.IntegerField(default=None)
     number_of_actions = models.IntegerField(default=1)
 
     def __str__(self):
-        return self.id + self.first_name + self.last_name + self.age + self.cost + self.number_of_actions
+        return self.id + self.first_name + self.last_name + self.age + self.gender + self.cost + self.number_of_actions
 
     class Meta:
         ordering = ['id']
@@ -138,6 +139,7 @@ class Killed(models.Model):
     class Meta:
         ordering = ['id']
 
+
 #
 # class Investigation(models.Model):
 #     id = models.IntegerField(primary_key=True, default=None)
@@ -164,6 +166,7 @@ class Record(models.Model):
     id = models.IntegerField(primary_key=True, default=None)
     suspect_id = models.ForeignKey(Suspect, default=None, on_delete=models.CASCADE)
     antecedent = models.CharField(max_length=100, default=None)
+
     # investigation = models.ForeignKey(Investigation, default=None, on_delete=models.CASCADE)
 
     def __str__(self):

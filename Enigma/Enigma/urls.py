@@ -8,8 +8,8 @@ from Enigma import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('Enigma/', include('game.urls')),
-    path('Enigma/', views.Enigma),
+    path('enigma/', include('game.urls')),
+    path('enigma/', views.enigma),
 ]
 
 # urlpatterns += staticfiles_urlpatterns()

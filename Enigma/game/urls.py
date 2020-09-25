@@ -27,9 +27,9 @@ urlpatterns = [
 
     path('api/detective/<int:id>/', views.DetectiveDetail.as_view()),
 
-    path('api/crime_location/<int:id>/', views.Crime_locationDetail.as_view()),
-    path('api/crime_locations/', views.Crime_locationList.as_view()),
-    path('api/filtered_crime_locations/', views2.Crime_locationList.as_view()),
+    # path('api/crime_location/<int:id>/', views.Crime_locationDetail.as_view()),
+    # path('api/crime_locations/', views.Crime_locationList.as_view()),
+    # path('api/filtered_crime_locations/', views2.Crime_locationList.as_view()),
 
     path('api/crime_detail/<int:id>/', views.Crime_detailsDetail.as_view()),
     path('api/crime_details/', views.Crime_detailsList.as_view()),

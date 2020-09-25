@@ -9,6 +9,13 @@ del path/db.sqlite3
 del path/migrations/migration_file
 """
 
+"""
+The Foreignkeys will be handed mades because of UNIQUE primarykey error, the sql generator /
+is not built to pay attention to this detail.
+There are generated but will need to be deleted after creation to pass over
+the NOT NULL constraint error.
+"""
+
 
 # Create your models here.
 class Mercenaries(models.Model):
@@ -18,13 +25,17 @@ class Mercenaries(models.Model):
     age = models.IntegerField(default=None)
     gender = models.CharField(max_length=10, default=None)
     cost = models.IntegerField(default=None)
-    number_of_actions = models.IntegerField(default=1)
+
+    # number_of_actions = models.IntegerField(default=1)
 
     def __str__(self):
-        return self.id + self.first_name + self.last_name + self.age + self.gender + self.cost + self.number_of_actions
+        return self.id + self.first_name + self.last_name + self.age + self.gender + self.cost
 
     class Meta:
         ordering = ['id']
+
+
+'''handle making'''
 
 
 class Detective(models.Model):
@@ -40,6 +51,9 @@ class Detective(models.Model):
         ordering = ['id']
 
 
+'''handle making'''
+
+
 class Quest(models.Model):
     id = models.IntegerField(primary_key=True, default=None)
     title = models.CharField(max_length=30, default=None)
@@ -50,15 +64,14 @@ class Quest(models.Model):
     class Meta:
         ordering = ['id']
 
-
 class Victim(models.Model):
     id = models.IntegerField(primary_key=True, default=None)
     first_name = models.CharField(max_length=30, default=None)
     last_name = models.CharField(max_length=30, default=None)
-    autopsia = models.CharField(max_length=100, default=None)
+    medical_file = models.CharField(max_length=100, default=None)
     gender = models.CharField(max_length=10, default=None)
     age = models.IntegerField(default=None)
-    ethnic_group = models.CharField(max_length=15, default=None)
+    ethnic_group = models.CharField(max_length=20, default=None)
     height = models.IntegerField(default=None)
     hair_color = models.CharField(max_length=15, default=None)
     eye_color = models.CharField(max_length=15, default=None)
@@ -68,10 +81,13 @@ class Victim(models.Model):
     insurance_owner = models.BooleanField(default=None)
 
     def __str__(self):
-        return self.id + self.first_name + self.last_name + self.autopsia + self.gender + self.age + self.ethnic_group + self.height + self.hair_color + self.eye_color + self.profession + self.resident + self.income + self.insurance_owner
+        return self.id + self.first_name + self.last_name + self.medical_file + self.gender + self.age + self.ethnic_group + self.height + self.hair_color + self.eye_color + self.profession + self.resident + self.income + self.insurance_owner
 
     class Meta:
         ordering = ["id"]
+
+
+''' à voir si la table sera conservée ou pas'''
 
 
 class Insurance(models.Model):
@@ -96,18 +112,54 @@ class Suspect(models.Model):
     height = models.IntegerField(default=None)
     hair_color = models.CharField(max_length=15, default=None)
     eye_color = models.CharField(max_length=15, default=None)
+    phone_number = models.IntegerField(default=None)
+    email = models.CharField(max_length=50, default=None)
     profession = models.CharField(max_length=30, default=None)
     resident = models.CharField(max_length=30, default=None)
     income = models.IntegerField(default=None)
     bound_with_victim = models.ForeignKey(Victim, default=None, on_delete=models.CASCADE)
     danger_level = models.BooleanField(default=None)
     corruption_cost = models.IntegerField(default=None)
+    clothes_size = models.CharField(max_length=5, default=None)
 
     def __str__(self):
-        return self.id + self.first_name + ' ' + self.last_name + self.gender + self.age + self.ethnic_group + self.height + self.hair_color + self.eye_color + self.profession + self.resident + self.bound_with_victim + self.danger_level + self.corruption_cost
+        return self.id + self.first_name + self.last_name + self.gender + self.age + self.ethnic_group + self.height + self.hair_color + self.eye_color + self.profession + self.resident + self.bound_with_victim + self.danger_level + self.corruption_cost + self.clothes_size + self.phone_number + self.email
 
     class Meta:
         ordering = ['id']
+
+
+class Car(models.Model):
+    id = models.IntegerField(primary_key=True, default=None)
+    car_make = models.CharField(max_length=30, default=None)
+    car_model = models.CharField(max_length=30, default=None)
+    car_model_year = models.IntegerField(default=None)
+    car_VIN = models.IntegerField(default=None)
+    car_owner = models.ForeignKey(Suspect, default=None, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.id + self.car_make + self.car_model + self.car_model_year + self.car_VIN
+
+    class Meta:
+        ordering = ['id']
+
+
+class Bank_account(models.Model):
+    id = models.IntegerField(primary_key=True, default=None)
+    credit_card_number = models.IntegerField(default=None)
+    credit_card_type = models.CharField(max_length=40, default=None)
+    IBAN = models.IntegerField(default=False)
+    card_owner = models.ForeignKey(Suspect, default=None, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.id + self.credit_card_number + self.credit_card_type
+
+    class Meta:
+        ordering = ['id']
+
+
+''' filled by player empty at the beginning
+prime_value needs to be handle made'''
 
 
 class Prisoners(models.Model):
@@ -123,6 +175,10 @@ class Prisoners(models.Model):
 
     class Meta:
         ordering = ['id']
+
+
+''' filled by player empty at the beginning
+prime_value needs to be handle made'''
 
 
 class Killed(models.Model):
@@ -184,28 +240,29 @@ class Crime_details(models.Model):
     nature = models.CharField(max_length=30, default=None)
     # weapon_used = models.CharField(max_length=30, default=None)
     autopsia = models.CharField(max_length=100, default=None)
+    location = models.CharField(max_length=100, default=None)
 
     # optional_clues = models.CharField(max_length=100, default=None)
 
     def __str__(self):
-        return self.id + self.crime_id + self.crime_quest + self.victim_id + self.estimated_date + self.nature + self.weapon_used + self.autopsia
+        return self.id + self.crime_quest + self.victim_id + self.estimated_date + self.nature + self.autopsia + self.location
 
     class Meta:
         ordering = ['id']
 
 
-class Crime_location(models.Model):
-    id = models.IntegerField(primary_key=True, default=None)
-    crime = models.ForeignKey(Crime_details, default=None, on_delete=models.CASCADE)
-    location = models.CharField(max_length=100, default=None)
+# class Crime_location(models.Model):
+#     id = models.IntegerField(primary_key=True, default=None)
+#     crime = models.ForeignKey(Crime_details, default=None, on_delete=models.CASCADE)
+#
+#     def __str__(self):
+#         return self.id + self.crime + self.location
+#
+#     class Meta:
+#         ordering = ['id']
 
-    def __str__(self):
-        return self.id + self.crime + self.location
-
-    class Meta:
-        ordering = ['id']
-
-
+'''the game will interact with this table thanks to corruption
+needs to be handle made'''
 class Clues(models.Model):
     id = models.IntegerField(primary_key=True, default=None)
     clue = models.CharField(max_length=200, default=None)

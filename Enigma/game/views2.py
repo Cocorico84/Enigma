@@ -1,8 +1,8 @@
-from game.models import Victim, Suspect, Mercenaries, Prisoners, Killed, Clues, Crime_details, Crime_location, Record, \
+from game.models import Victim, Suspect, Mercenaries, Prisoners, Killed, Clues, Crime_details, Record, \
     Insurance
 from game.serializers import VictimSerializer, SuspectSerializer, MercenariesSerializer, PrisonersSerializer, \
     KilledSerializer, CluesSerializer, Crime_detailsSerializer, \
-    Crime_locationSerializer, RecordSerializer, InsuranceSerializer
+    RecordSerializer, InsuranceSerializer
 from rest_framework.generics import ListAPIView
 from rest_framework.filters import SearchFilter, OrderingFilter
 
@@ -49,10 +49,10 @@ class Crime_detailsList(ListAPIView):
     filter_backends = (SearchFilter, OrderingFilter)
 
 
-class Crime_locationList(ListAPIView):
-    queryset = Crime_location.objects.all()
-    serializer_class = Crime_locationSerializer
-    filter_backends = (SearchFilter, OrderingFilter)
+# class Crime_locationList(ListAPIView):
+#     queryset = Crime_location.objects.all()
+#     serializer_class = Crime_locationSerializer
+#     filter_backends = (SearchFilter, OrderingFilter)
 
 
 class RecordList(ListAPIView):

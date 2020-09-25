@@ -13,9 +13,9 @@ from rest_framework import status
 
 from .forms import CreateUserForm
 from .models import Suspect, Crime_details, Victim, Mercenaries, Detective, Quest, Prisoners, Killed, Clues, \
-    Crime_location, Record, Insurance
+    Record, Insurance
 from .serializers import SuspectSerializer, VictimSerializer, MercenariesSerializer, DetectiveSerializer, \
-    QuestSerializer, PrisonersSerializer, KilledSerializer, CluesSerializer, Crime_locationSerializer, \
+    QuestSerializer, PrisonersSerializer, KilledSerializer, CluesSerializer, \
     Crime_detailsSerializer, RecordSerializer, InsuranceSerializer
 
 '''
@@ -221,50 +221,50 @@ class Crime_detailsList(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class Crime_locationDetail(APIView):
-    # authentication_classes = [TokenAuthentication]
-    permission_classes = [IsAuthenticated, IsAdminUser]
-
-    def get_crime_location(self, id):
-        try:
-            return Crime_location.objects.get(id=id)
-        except Crime_location.DoesNotExist:
-            raise Http404
-
-    def get(self, request, id, format=None):
-        crime_location = self.get_crime_location(id)
-        serializer = Crime_locationSerializer(crime_location)
-        return Response(serializer.data)
-
-    def put(self, request, id, format=None):
-        crime_location = self.get_crime_location(id)
-        serializer = Crime_locationSerializer(crime_location, data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-    def delete(self, request, id, format=None):
-        crime_location = self.get_crime_location(id)
-        crime_location.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
-
-
-class Crime_locationList(APIView):
-    # authentication_classes = [TokenAuthentication]
-    permission_classes = [IsAuthenticated, IsAdminUser]
-
-    def get(self, request, format=None):
-        crime_location = Crime_location.objects.all()
-        serializer = Crime_locationSerializer(crime_location, many=True)
-        return Response(serializer.data)
-
-    def post(self, request, format=None):
-        serializer = Crime_locationSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+# class Crime_locationDetail(APIView):
+#     # authentication_classes = [TokenAuthentication]
+#     permission_classes = [IsAuthenticated, IsAdminUser]
+#
+#     def get_crime_location(self, id):
+#         try:
+#             return Crime_location.objects.get(id=id)
+#         except Crime_location.DoesNotExist:
+#             raise Http404
+#
+#     def get(self, request, id, format=None):
+#         crime_location = self.get_crime_location(id)
+#         serializer = Crime_locationSerializer(crime_location)
+#         return Response(serializer.data)
+#
+#     def put(self, request, id, format=None):
+#         crime_location = self.get_crime_location(id)
+#         serializer = Crime_locationSerializer(crime_location, data=request.data)
+#         if serializer.is_valid():
+#             serializer.save()
+#             return Response(serializer.data)
+#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+#
+#     def delete(self, request, id, format=None):
+#         crime_location = self.get_crime_location(id)
+#         crime_location.delete()
+#         return Response(status=status.HTTP_204_NO_CONTENT)
+#
+#
+# class Crime_locationList(APIView):
+#     # authentication_classes = [TokenAuthentication]
+#     permission_classes = [IsAuthenticated, IsAdminUser]
+#
+#     def get(self, request, format=None):
+#         crime_location = Crime_location.objects.all()
+#         serializer = Crime_locationSerializer(crime_location, many=True)
+#         return Response(serializer.data)
+#
+#     def post(self, request, format=None):
+#         serializer = Crime_locationSerializer(data=request.data)
+#         if serializer.is_valid():
+#             serializer.save()
+#             return Response(serializer.data, status=status.HTTP_201_CREATED)
+#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class CluesDetail(APIView):

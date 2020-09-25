@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import Suspect, Detective, Quest, Prisoners, Killed, Insurance, Crime_location, Record, \
+from .models import Suspect, Detective, Quest, Prisoners, Killed, Insurance, Record, \
     Victim, \
     Mercenaries, Clues, Crime_details
 
@@ -43,23 +43,23 @@ class CluesSerializer(serializers.ModelSerializer):
         return Clues
 
 
-class Crime_locationSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Crime_location
-        fields = '__all__'
-
-    def create(self, validated_data):
-        """
-        Create and return a new `Crime_location` instance, given the validated data.
-        """
-        return Crime_location.objects.create(**validated_data)
-
-    def update(self, Quest, validated_data):
-        Crime_location.id = validated_data.get('id', Crime_location.id)
-        Crime_location.crime = validated_data.get('crime', Crime_location.crime)
-        Crime_location.location = validated_data.get('location', Crime_location.location)
-        Crime_location.save()
-        return Crime_location
+# class Crime_locationSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Crime_location
+#         fields = '__all__'
+#
+#     def create(self, validated_data):
+#         """
+#         Create and return a new `Crime_location` instance, given the validated data.
+#         """
+#         return Crime_location.objects.create(**validated_data)
+#
+#     def update(self, Quest, validated_data):
+#         Crime_location.id = validated_data.get('id', Crime_location.id)
+#         Crime_location.crime = validated_data.get('crime', Crime_location.crime)
+#         Crime_location.location = validated_data.get('location', Crime_location.location)
+#         Crime_location.save()
+#         return Crime_location
 
 
 class Crime_detailsSerializer(serializers.ModelSerializer):
@@ -80,6 +80,7 @@ class Crime_detailsSerializer(serializers.ModelSerializer):
         Crime_details.estimated_date = validated_data.get('estimated_date', Crime_details.estimated_date)
         Crime_details.nature = validated_data.get('nature', Crime_details.nature)
         Crime_details.autopsia = validated_data.get('autopsia', Crime_details.autopsia)
+        Crime_details.location = validated_data.get('location', Crime_details.location)
         Crime_details.save()
         return Crime_details
 

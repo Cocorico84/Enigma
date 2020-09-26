@@ -1,8 +1,50 @@
 from rest_framework import serializers
 
-from .models import Suspect, Detective, Quest, Prisoners, Killed, Insurance, Record, \
-    Victim, \
-    Mercenaries, Clues, Crime_details
+from .models import Suspect, Detective, Quest, Prisoners, Killed, Insurance, Record, Victim, Mercenaries, Clues, \
+    Crime_details, Car, Bank_account
+
+
+class CarSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Car
+        fields = '__all__'
+
+    def create(self, validated_data):
+        """
+        Create and return a new `Car` instance, given the validated data.
+        """
+        return Car.objects.create(**validated_data)
+
+    def update(self, Car, validated_data):
+        Car.id = validated_data.get('id', Car.id)
+        Car.car_make = validated_data.get('car_make', Car.car_make)
+        Car.car_model = validated_data.get('car_model', Car.car_model)
+        Car.car_model_year = validated_data.get('car_model_year', Car.car_model_year)
+        Car.car_VIN = validated_data.get('car_VIN', Car.car_VIN)
+        Car.car_owner = validated_data.get('car_owner', Car.car_owner)
+        Car.save()
+        return Car
+
+
+class Bank_accountSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Bank_account
+        fields = '__all__'
+
+    def create(self, validated_data):
+        """
+        Create and return a new `Bank_account` instance, given the validated data.
+        """
+        return Bank_account.objects.create(**validated_data)
+
+    def update(self, Bank_account, validated_data):
+        Bank_account.id = validated_data.get('id', Bank_account.id)
+        Bank_account.credit_card_number = validated_data.get('credit_card_number', Bank_account.credit_card_number)
+        Bank_account.credit_card_type = validated_data.get('credit_card_type', Bank_account.credit_card_type)
+        Bank_account.IBAN = validated_data.get('IBAN', Bank_account.IBAN)
+        Bank_account.card_owner = validated_data.get('card_owner', Bank_account.card_owner)
+        Bank_account.save()
+        return Bank_account
 
 
 class InsuranceSerializer(serializers.ModelSerializer):
@@ -16,7 +58,7 @@ class InsuranceSerializer(serializers.ModelSerializer):
         """
         return Insurance.objects.create(**validated_data)
 
-    def update(self, Quest, validated_data):
+    def update(self, Insurance, validated_data):
         Insurance.id = validated_data.get('id', Insurance.id)
         Insurance.victim_insurance = validated_data.get('victim_insurance', Insurance.victim_insurance)
         Insurance.value = validated_data.get('value', Insurance.value)
@@ -35,7 +77,7 @@ class CluesSerializer(serializers.ModelSerializer):
         """
         return Clues.objects.create(**validated_data)
 
-    def update(self, Quest, validated_data):
+    def update(self, Clues, validated_data):
         Clues.id = validated_data.get('id', Clues.id)
         Clues.clue = validated_data.get('clue', Clues.clue)
         Clues.crime_clues = validated_data.get('crime_clues', Clues.crime_clues)
@@ -73,10 +115,10 @@ class Crime_detailsSerializer(serializers.ModelSerializer):
         """
         return Crime_details.objects.create(**validated_data)
 
-    def update(self, Quest, validated_data):
+    def update(self, Crime_details, validated_data):
         Crime_details.id = validated_data.get('id', Crime_details.id)
         Crime_details.crime_quest = validated_data.get('crime_quest', Crime_details.crime_quest)
-        Crime_details.victim_id = validated_data.get('antecedent', Crime_details.victim_id)
+        Crime_details.victim_id = validated_data.get('victim_id', Crime_details.victim_id)
         Crime_details.estimated_date = validated_data.get('estimated_date', Crime_details.estimated_date)
         Crime_details.nature = validated_data.get('nature', Crime_details.nature)
         Crime_details.autopsia = validated_data.get('autopsia', Crime_details.autopsia)
@@ -94,9 +136,9 @@ class RecordSerializer(serializers.ModelSerializer):
         """
         Create and return a new `Record` instance, given the validated data.
         """
-        return Prisoners.objects.create(**validated_data)
+        return Record.objects.create(**validated_data)
 
-    def update(self, Quest, validated_data):
+    def update(self, Record, validated_data):
         Record.id = validated_data.get('id', Record.id)
         Record.suspect_id = validated_data.get('suspect_id', Record.suspect_id)
         Record.antecedent = validated_data.get('antecedent', Record.antecedent)
@@ -115,7 +157,7 @@ class PrisonersSerializer(serializers.ModelSerializer):
         """
         return Prisoners.objects.create(**validated_data)
 
-    def update(self, Quest, validated_data):
+    def update(self, Prisoners, validated_data):
         Prisoners.id = validated_data.get('id', Quest.id)
         Prisoners.prisoner_id = validated_data.get('suspect_id', Prisoners.prisoner_id)
         Prisoners.prime_value = validated_data.get('prime_value', Prisoners.prime_value)
@@ -134,9 +176,9 @@ class KilledSerializer(serializers.ModelSerializer):
         """
         return Killed.objects.create(**validated_data)
 
-    def update(self, Quest, validated_data):
-        Killed.id = validated_data.get('id', Quest.id)
-        Killed.murdered_id_id = validated_data.get('suspect_id', Killed.murdered_id)
+    def update(self, Killed, validated_data):
+        Killed.id = validated_data.get('id', Killed.id)
+        Killed.murdered_id = validated_data.get('murdered_id', Killed.murdered_id)
         Killed.prime_value = validated_data.get('prime_value', Prisoners.prime_value)
         Killed.save()
         return Killed

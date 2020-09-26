@@ -13,10 +13,10 @@ from rest_framework import status
 
 from .forms import CreateUserForm
 from .models import Suspect, Crime_details, Victim, Mercenaries, Detective, Quest, Prisoners, Killed, Clues, \
-    Record, Insurance
+    Record, Insurance, Car, Bank_account
 from .serializers import SuspectSerializer, VictimSerializer, MercenariesSerializer, DetectiveSerializer, \
     QuestSerializer, PrisonersSerializer, KilledSerializer, CluesSerializer, \
-    Crime_detailsSerializer, RecordSerializer, InsuranceSerializer
+    Crime_detailsSerializer, RecordSerializer, InsuranceSerializer, CarSerializer, Bank_accountSerializer
 
 '''
 UserCreationForm is sdt django authentication system, on the contrary CreateUserForm is a customizable
@@ -81,6 +81,98 @@ def LoginPage(request):
 def LoggedOutUser(request):
     logout(request)
     return redirect('login')
+
+
+class CarDetail(APIView):
+    # authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated, IsAdminUser]
+
+    def get_car(self, id):
+        try:
+            return Car.objects.get(id=id)
+        except Car.DoesNotExist:
+            raise Http404
+
+    def get(self, request, id, format=None):
+        car = self.get_car(id)
+        serializer = CarSerializer(car)
+        return Response(serializer.data)
+
+    def put(self, request, id, format=None):
+        car = self.get_car(id)
+        serializer = CarSerializer(car, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, id, format=None):
+        car = self.get_car(id)
+        car.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+class CarList(APIView):
+    # authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated, IsAdminUser]
+
+    def get(self, request, format=None):
+        car = Car.objects.all()
+        serializer = CarSerializer(car, many=True)
+        return Response(serializer.data)
+
+    def post(self, request, format=None):
+        serializer = CarSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class Bank_accountDetail(APIView):
+    # authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated, IsAdminUser]
+
+    def get_bank_account(self, id):
+        try:
+            return Bank_account.objects.get(id=id)
+        except Bank_account.DoesNotExist:
+            raise Http404
+
+    def get(self, request, id, format=None):
+        bank_account = self.get_bank_account(id)
+        serializer = Bank_accountSerializer(bank_account)
+        return Response(serializer.data)
+
+    def put(self, request, id, format=None):
+        bank_account = self.get_bank_account(id)
+        serializer = Bank_accountSerializer(bank_account, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, id, format=None):
+        bank_account = self.get_bank_account(id)
+        bank_account.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+class Bank_accountList(APIView):
+    # authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated, IsAdminUser]
+
+    def get(self, request, format=None):
+        bank_account = Bank_account.objects.all()
+        serializer = Bank_accountSerializer(bank_account, many=True)
+        return Response(serializer.data)
+
+    def post(self, request, format=None):
+        serializer = Bank_accountSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class InsuranceDetail(APIView):

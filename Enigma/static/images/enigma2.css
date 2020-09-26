@@ -3,9 +3,8 @@ padding:0px;
 }
 
 #main{
-background-color: gainsboro;
-padding:30px 0px;
-font-family: 'Cardo', serif;
+background: linear-gradient(#e66465, #9198e5);
+padding:100px 0px;
 }
 #main h1{
 font weight:920;
@@ -23,6 +22,7 @@ box-shadow:0 0 20px 7px (0,0,0,0.1)
 margin:75px 10px;
 justify-content: center;
 text-align: center;
+font-family: 'Cardo', serif;
 
 }
 .mx-auto {
@@ -39,3 +39,4 @@ font weight: 600;
 color: #63a6b0;
 text-decoration:none;
 }
+

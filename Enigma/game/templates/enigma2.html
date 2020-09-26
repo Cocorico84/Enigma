@@ -12,23 +12,27 @@
             crossorigin="anonymous"></script>
     <link rel="stylesheet" href="http://127.0.0.1:8000/images/enigma2.css">
     <link href="https://fonts.googleapis.com/css2?family=Cardo:ital@1&display=swap" rel="stylesheet">
+    <!--    <link href="https://fonts.googleapis.com/css2?family=Emblema+One&display=swap" rel="stylesheet">-->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,500&display=swap"
+          rel="stylesheet">
 </head>
 
 <center>
-    <section id="main">
+    <div id="main">
         <div class="container">
             <div class="title">
-                <h1>Select one adventure of your choice by clicking on a card</h1>
+                <h1 style="font-family: 'Playfair Display', serif;">Select one adventure of your choice by clicking on a
+                    card</h1>
             </div>
             <div class="justify-content-center" style="vertical-align: middle">
-                <div class="col-md-4" >
+                <div class="col-md-4">
                     <div class="card text-center">
                         <img src="http://127.0.0.1:8000/images/dark_city.jpg" class="card-img-top">
                         <div class="card-body">
-                            <h5 class="card-title">Enigma</h5>
+                            <h5 class="card-title" style="font-weight: 500; text-decoration: underline;">Enigma</h5>
                             <p class="card-text">Test your abilities on an dark ambiance thriller game with API HTTP
                                 requests and SQL data manipulation on Django Framework.</p>
-                            <p><a href=" home/" class="text-dark">Primary link</a></p>
+                            <p><a href=" home/" class="text-dark" style="font-weight: 800;">Join the adventure</a></p>
                         </div>
                     </div>
                 </div>
@@ -50,13 +54,18 @@
                 <!--                    </div>-->
             </div>
         </div>
-    </section>
+<!--    </div>-->
+<!--        <div class="wave"></div>-->
 </center>
 <script>
 function relocate_home()
 {
      location.href = "http://127.0.0.1:8000/enigma/home";
 }
+
+
+
+
 
 
 </script>

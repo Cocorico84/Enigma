@@ -31,9 +31,17 @@ urlpatterns = [
     # path('api/crime_locations/', views.Crime_locationList.as_view()),
     # path('api/filtered_crime_locations/', views2.Crime_locationList.as_view()),
 
+    path('api/bank_account/<int:id>/', views.Bank_accountDetail.as_view()),
+    path('api/bank_accounts/', views.Bank_accountList.as_view()),
+    path('api/filtered_bank_accounts/', views2.Bank_accountList.as_view()),
+
+    path('api/car/<int:id>/', views.CarDetail.as_view()),
+    path('api/cars/', views.CarList.as_view()),
+    path('api/filtered_cars/', views2.CarList.as_view()),
+
     path('api/crime_detail/<int:id>/', views.Crime_detailsDetail.as_view()),
     path('api/crime_details/', views.Crime_detailsList.as_view()),
-    path('api/filtered_crime_ldetails/', views2.Crime_detailsList.as_view()),
+    path('api/filtered_crime_details/', views2.Crime_detailsList.as_view()),
 
     path('api/record/<int:id>/', views.RecordDetail.as_view()),
     path('api/records/', views.RecordList.as_view()),

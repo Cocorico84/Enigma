@@ -64,6 +64,7 @@ class Quest(models.Model):
     class Meta:
         ordering = ['id']
 
+
 class Victim(models.Model):
     id = models.IntegerField(primary_key=True, default=None)
     first_name = models.CharField(max_length=30, default=None)
@@ -112,7 +113,7 @@ class Suspect(models.Model):
     height = models.IntegerField(default=None)
     hair_color = models.CharField(max_length=15, default=None)
     eye_color = models.CharField(max_length=15, default=None)
-    phone_number = models.IntegerField(default=None)
+    phone_number = models.CharField(max_length=30, default=None)
     email = models.CharField(max_length=50, default=None)
     profession = models.CharField(max_length=30, default=None)
     resident = models.CharField(max_length=30, default=None)
@@ -263,6 +264,8 @@ class Crime_details(models.Model):
 
 '''the game will interact with this table thanks to corruption
 needs to be handle made'''
+
+
 class Clues(models.Model):
     id = models.IntegerField(primary_key=True, default=None)
     clue = models.CharField(max_length=200, default=None)

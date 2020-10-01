@@ -13,11 +13,16 @@
 html,
 body {
   height: 100%;
-}
-
-body {
   display: grid;
   place-items: center;
+}
+h1{
+    background: url('http://127.0.0.1:8000/images/cartoon_valley.jpg') 0 0 repeat-x;
+    position:relative;
+    display: inline-block;
+    margin:0 25px;
+    padding:0 10px;
+    height:40px;
 }
 
 .page-content {
@@ -206,4 +211,43 @@ body {
     -webkit-transition-duration: 0s;
             transition-duration: 0s;
   }
+}
+
+
+section .wave
+{
+position:absolute;
+bottom:0;
+left:0;
+width:100%
+height:100px;
+background:url("http://127.0.0.1:8000/images/wave.png")
+background-size:1000px 100px;
+}
+section .wave.wave1
+{
+animation:animate 30s linear infinite;
+z-index:1000;
+opacity:1;
+animation-delay:0s;
+bottom:0:
+}
+section .wave.wave2
+animation:animate2 15s linear infinite;
+z-index:999;
+opacity:1;
+animation-delay:-5s;
+bottom:10px;
+
+
+@keyframes animate
+{
+0%
+{
+background-position-x:0;
+}
+100%
+{
+background-position-x:1000px;
+}
 }

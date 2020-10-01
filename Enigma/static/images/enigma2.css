@@ -1,0 +1,51 @@
+{margin:0px;
+padding:0px;
+}
+
+#main{
+background: linear-gradient(#e66465, #9198e5);
+padding:100px 0px;
+}
+#main h1{
+font weight:920;
+font-size:34px;
+padding-button:5px;
+
+}
+.title p {
+font-size:10px;
+}
+.card-body {
+box-shadow:0 0 20px 7px (0,0,0,0.1)
+}
+.card{
+margin:75px 10px;
+justify-content: center;
+text-align: center;
+font-family: 'Cardo', serif;
+
+}
+.mx-auto {
+ margin-right: auto !important;
+ margin-left: auto !important;
+}
+.card-body a{
+color:#0c7f90;
+font-size: 15px;
+margin-top: auto;
+font weight: 600;
+}
+.card body a:hover{
+color: #63a6b0;
+text-decoration:none;
+}
+
+section
+{
+position:relative;
+width:100%;
+height:100vh;
+background:blue;
+overflow:hidden;
+}
+

@@ -1,19 +1,29 @@
 {% load static %}
-<link rel="stylesheet" href="http://127.0.0.1:8000/images/enigma.css">
+<!--<link rel="stylesheet" href="http://127.0.0.1:8000/images/enigma.css">-->
+<body>
+<!--    <div class="background-image" style="url(http://127.0.0.1:8000/images/cartoon_valley.jpg);height: 100%; background-position: center;-->
+<!--background-repeat: no-repeat;background-size: cover;"></div>-->
+<div style="font-family: 'Special Elite', cursive;"><h1>Welcome to our website you can choose a game by clicking on a
+    card</h1></div>
+
 <main class="page-content">
-  <div class="card" style="vertical-align: middle">
-    <div class="content">
-      <h2 class="title">Enigma</h2>
-      <p class="copy">Test your abilities on an dark ambiance thriller game with API HTTP requests and SQL data manipulation on Django Framework.</p>
-      <button type="button" class="btn btn-dark" onclick="relocate_home()">Click here to join the adventure</button>
+    <div class="card" style="vertical-align: middle">
+        <div class="content">
+            <h2 class="title" style="font-family: 'Special Elite', cursive;">Enigma</h2>
+            <p class="copy">Test your abilities on an dark ambiance thriller game with API HTTP requests and SQL data
+                manipulation on Django Framework.</p>
+            <button type="button" class="btn btn-dark" onclick="relocate_home()">Click here to join the adventure
+            </button>
+        </div>
     </div>
-  </div>
 </main>
+</body>
 
 
 <script>
 function relocate_home()
 {
-     location.href = "http://127.0.0.1:8000/Enigma/home";
+     location.href = "http://127.0.0.1:8000/enigma/home";
 }
+
 </script>

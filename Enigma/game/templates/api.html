@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet">
+    <title>ENIGMA | Sent by The Crown </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Bootstrap Example</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="http://127.0.0.1:8000/images/api.css">
+</head>
+<body>
+
+<div class="bg-image"></div>
+
+<div class="bg-text">
+    <h1>Welcome to the Circle sir. My name is Pat. What is the will of The Crown today?</h1>
+    <p>The API investigation department is at your disposal. <br>
+        You are allowed to consult all the areas in the archives.<br>
+        However, there are very big and you could be easily lost.<br>
+        You need a methodology to start the investigation.<br>
+        Use the extension of the url to gain access to specific API data.<br>
+        You should start to consult the crimes_data by extending the following url: <br>
+        https:// + domain/enigma/api/ + "what you search for".<br>
+        By mistake or by chance you discovered your own profile saved on the api at "api/detective/int:id/"</p>
+    <button type="button" class="btn btn-outline-warning" onclick=" relocate_home()"
+            style=margin-top:40px;margin-bottom:40px;>Exit from the Circle
+    </button>
+    <p>Pat:"Sir don't forget that you need an authorization to leave with a file. Remember to leave behind what you
+        consulted.</p>
+    <p>Pat:"You wouldn't want to be suspected of sedition 'do you? :-)</p>
+    <p>Pat:"I wish you a good hunt sir".</p>
+
+</div>
+
+
+</body>
+</html>
+
+<script>
+function relocate_home()
+{
+     location.href = "http://127.0.0.1:8000/enigma/home";
+}
+
+
+
+
+</script>

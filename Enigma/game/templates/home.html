@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+{%load static%}
+<html lang="en">
+<head>
+    <title>enigma | Sent by The Crown </title>
+    <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet">
+    <!--    <link rel="stylesheet" href="http://127.0.0.1:8000/images/police.css">-->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</head>
+
+<body style="background-color: gainsboro;font-family: 'Special Elite', cursive;">
+<center>
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <a class="navbar-brand" href="#">
+            <img src="http://127.0.0.1:8000/images/detective.png" alt="logo" style="width:60px;">
+            <a class="navbar-brand" href="#">enigma</a>
+        </a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+                data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
+                aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="d-md-flex d-block flex-row mx-md-auto mx-0">
+
+            <div class="collapse navbar-collapse mr-auto" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <a class="nav-item nav-link active" href="http://127.0.0.1:8000/enigma/api">The Circle Archives
+                        (API)
+                        <span class="sr-only">(current)</span></a>
+                    <a class="nav-item nav-link active" href="http://127.0.0.1:8000/enigma/registrate">Services of
+                        investigation recruitment (Registrate)
+                        <span class="sr-only">(current)</span></a>
+                    <a class="nav-item nav-link active" href="http://127.0.0.1:8000/enigma/login"> Service of
+                        investigation Authentification (Login)
+                        <span class="sr-only">(current)</span></a>
+                    <a class="nav-item nav-link active" href="http://127.0.0.1:8000/enigma/logout"> Leave this bridge
+                        (logout)
+                        <span class="sr-only">(current)</span></a>
+                    <!--                <a class="nav-item nav-link" href="#">Features</a>-->
+                    <!--                <a class="nav-item nav-link" href="#">Pricing</a>-->
+                    <!--                <a class="nav-item nav-link disabled" href="#">Disabled</a>-->
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!--<nav class="navbar navbar-expand-sm bg-dark navbar-dark">-->
+    <!--    <a class="navbar-brand" href="#">-->
+    <!--        <img src="detective.png" alt="logo" style="width:60px;">-->
+    <!--    </a>-->
+    <!--    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">-->
+    <!--        <span class="navbar-toggler-icon"></span>-->
+    <!--    </button>-->
+    <!--    <div class="collapse navbar-collapse" id="collapsibleNavbar">-->
+    <!--        <ul class="nav justify-content-center">-->
+    <!--            <li class="nav-item">-->
+    <!--                <a class="nav-link" href="#">Link</a>-->
+    <!--            </li>-->
+    <!--            <li class="nav-item">-->
+    <!--                <a class="nav-link" href="#">Link</a>-->
+    <!--            </li>-->
+
+    <!--            <li class="dropdown">-->
+    <!--                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Link-->
+    <!--                </a></li>-->
+    <!--        </ul>-->
+    <!--    </div>-->
+    <!--</nav>-->
+    <!--    <img class="mx-auto d-block img-fluid unlock-icon" src="http://127.0.0.1:8000/images/dark_bridge.jpg" alt="Unlock"/>-->
+
+    <div class="jumbotron card card-image col-lg-12 col-md-12 col-sm-10 mx-auto"
+         style="background-image: url(http://127.0.0.1:8000/images/dark_bridge.jpg);margin-bottom: 0px;
+height: 800px;
+color: white; /* Le texte sera affiché en blanc */
+text-shadow: black 0.3em 0.3em 0.3em;
+background-size: cover;background-position: center;
+  background-repeat: no-repeat;">
+        <div class="text-white text-center py-5 px-4">
+            <div style=width:100%;>
+                <h2 class="card-title h1-responsive pt-3 mb-5 font-bold"><strong>The Crown wishes you good fortune in
+                    your
+                    quest detective</strong></h2>
+                <!--      <p class="mx-5 mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat fugiat, laboriosam, voluptatem,-->
+                <!--        optio vero odio nam sit officia accusamus minus error nisi architecto nulla ipsum dignissimos. Odit sed qui, dolorum!-->
+                <!--      </p>-->
+            </div>
+        </div>
+    </div>
+
+
+    <hr style="height:1%;width:70%;color:gray;background-color:gray;">
+
+
+    <div class="container" style=margin:10px;>
+        <div class="row align-items-center">
+            <div class="col-lg-9 col-md-12">
+            </div>
+        </div>
+        <div class="col-lg-9 col-md-12">
+            <!-- Section Tittle -->
+            <div class="section-tittle mb-25" style=margin:100px;margin-bottom:50px;>
+                <h2>Find the murderers and punish them!</h2>
+            </div>
+        </div>
+
+        <p class="mb-20">
+            Agent of The Crown you are hurried to solve a new case!
+            You have a meeting on this bridge, your contact at the Circle is going to dive you into into a sordid
+            investigation through the beginning of the 20th century
+            in a fictive town called Scoundrels-City ruled by The Crown whose you are the detective.
+            Your purpose is to catch the wretched who murdered people by greed, lust, hate or just for the
+            pleasure of it!
+        </p>
+        <p class="mb-30">For this city is full of drunken rats who plunder at any moment or sell their own
+            mother for a coin.
+            The murderers will be even more dangerous.
+            We can't no longer tolerate their insolence toward The Crown, a team of agents followed by
+            heartless mercenaries have been mandated to end this sins!
+        </p>
+    </div>
+
+    <hr style="height:1%;width:70%;color:gray;background-color:gray;margin:100px">
+
+    <div class="row justify-content-center">
+        <div class="col-lg-9 col-md-12">
+            <div class="section-tittle text-center mb-55" style=margin-bottom:70px;>
+                <h2>Tutorial</h2>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-4 col-md-6 col-sm-6" style=margin-bottom:100px;>
+            <div class="single-cat text-center">
+                <div class="cat-icon">
+                    <img src="http://127.0.0.1:8000/images/cover.png">
+                </div>
+                <div class="cat-cap" style="margin:20px">
+                    <h5><a href="">Choose your cover!</a></h5>
+                    <p> Don't be caught during your investigation, the cover can help you to catch the
+                        murderers.<br>
+                        Create a cover inside the detective table with the api to enter the game.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-6" style=margin-bottom:100px;>
+            <div class="single-cat text-center">
+                <div class="cat-icon">
+                    <img src="http://127.0.0.1:8000/images/murder.png">
+                </div>
+                <div class="cat-cap" style="margin:20px">
+                    <h5><a href="">Proceed with caution!</a></h5>
+                    <p>The filthy wretched won't hesitate a second to murder you if you get too close!<br>
+                        In this city the righteous do not exist. Murderers aren't the only potential threat.<br>
+                        There might be some unruly people at the thought of being arrested by an agent</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-6" style=margin-bottom:100px;>
+            <div class="single-cat text-center">
+                <div class="cat-icon">
+                    <img src="http://127.0.0.1:8000/images/monkey.png">
+                </div>
+                <div class="cat-cap" style="margin:20px">
+                    <h5><a href="">Don't play by the rules!</a></h5>
+                    <p>If you have been seen and the guilty escape you can murder them!
+                        The Crown is not very careful about ethics.<br> Well it's just criminals after all!<br>
+                        You have two tables in the database at your disposal one for the caught and another for the
+                        killed.<br>
+                        The Crown would prefer if you avoid to kill too many people...this shouldn't be known.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-6" style=margin-bottom:100px;>
+            <div class="single-cat text-center">
+                <div class="cat-icon">
+                    <img src="http://127.0.0.1:8000/images/collaboration.png" alt="">
+                </div>
+                <div class="cat-cap" style="margin:20px">
+                    <h5><a href="">Teamplay is everything...or not!</a></h5>
+                    <p>You might not be the only one who wants to want a reward from The Crown.<br>
+                        Don't be fooled! Do not arrest another undercover detective.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-6" style=margin-bottom:100px;>
+            <div class="single-cat text-center">
+                <div class="cat-icon">
+                    <img src="http://127.0.0.1:8000/images/bribe.png">
+                </div>
+                <div class="cat-cap" style="margin:20px">
+                    <h5><a href="">Use your budget...and control it!</a></h5>
+                    <p>Bribe the vermin if it can allow you to catch a better prize!<br>
+                        Gain information by corruption feeds the clues database. </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-6" style=margin-bottom:100px;>
+            <div class="single-cat text-center">
+                <div class="cat-icon">
+                    <img src="http://127.0.0.1:8000/images/cost.png">
+                </div>
+                <div class="cat-cap" style="margin:20px">
+                    <h5><a href="">Catch some morons!</a></h5>
+                    <p>Every guilty target you catch brings you money from The Crown.<br>
+                        Offenders prizes earn you lesser than the criminals.<br>
+                        Remember that the main quest is to punish the 5 murderers.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-6" style=margin-bottom:100px;>
+            <div class="single-cat text-center">
+                <div class="cat-icon">
+                    <img src="http://127.0.0.1:8000/images/skills.png">
+                </div>
+                <div class="cat-cap" style="margin:20px">
+                    <h5><a href="">Learn some skills!</a></h5>
+                    <p>Some scums are strangely cleverer than others.<br>
+                        They won't be caught without the correct skill...at least if you want to catch them.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-6" style=margin-bottom:100px;>
+            <div class="single-cat text-center">
+                <div class="cat-icon">
+                    <img src="http://127.0.0.1:8000/images/mercenary.png">
+                </div>
+                <div class="cat-cap" style="margin:20px">
+                    <h5><a href="">Hire mercenaries!</a></h5>
+                    <p>Some muscles won't be too much to catch these scoundrels.<br>
+                        Mercenaries from the kindgom are useful to get rid of a criminal...but really greedy and
+                        expensive.<br>
+                        When The Crown says "DEAD OR ALIVE" they say "NOT ALIVE"!</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-6" style=margin-bottom:100px;>
+            <div class="single-cat text-center">
+                <div class="cat-icon">
+                    <img src="http://127.0.0.1:8000/images/archives.png">
+                </div>
+                <div class="cat-cap" style="margin:20px">
+                    <h5><a href="">Use the Circle's Archives!</a></h5>
+                    <p>Your chiefs are at the head of a unique organization at the service of The Crown called the
+                        Circle.<br>
+                        It's perfectly GDPR and respectful of basic human rights...<br>
+                        Use the surveillance files to find the criminals or everyone else...honestly who cares?<br>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr style="height:1%;width:70%;color:gray;background-color:gray;margin:100px">
+
+    <div class="row justify-content-center">
+        <div class="col-xl-7 col-lg-8">
+            <div class="section-tittle text-center mb-55" style=margin:50px;>
+                <h2>Achievements</h2>
+                <div class="container">
+                    <div id="accordion" style=margin:100px;>
+                        <div class="card">
+                            <div class="card-header">
+                                <a class="card-link" data-toggle="collapse" href="#collapseOne">
+                                    Collapsible Group Item #1
+                                </a>
+                            </div>
+                            <div id="collapseOne" class="collapse show" data-parent="#accordion">
+                                <span class="badge badge-warning">Gold</span>
+                                <div class="card-body">
+                                    You caught everyone without killing everyone, the rooms of interrogation are full.
+                                    You are a real detective!
+                                    The Crown is satisfied and rewards you. You have shown a bit of mercy for the people
+                                    and preserved your ethic.
+                                    However, this didn't please to everyone in your hierarchy...
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <a class="collapsed card-link" data-toggle="collapse" href="#collapseTwo">
+                                    Collapsible Group Item #2
+                                </a>
+                            </div>
+                            <div id="collapseTwo" class="collapse" data-parent="#accordion">
+                                <span class="badge badge-light">Silver</span>
+                                <div class="card-body">
+                                    You captured or killed the wretched that have corrupted this city. You are a real
+                                    inquisitor agent!
+                                    The Crown is satisfied and rewards you.
+                                    The end justify the means! We must fight fire with fire to bring justice to this
+                                    world!
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <a class="collapsed card-link" data-toggle="collapse" href="#collapseThree">
+                                    Collapsible Group Item #3
+                                </a>
+                            </div>
+                            <div id="collapseThree" class="collapse" data-parent="#accordion">
+                                <span class="badge badge-danger">Bronze</span>
+                                <div class="card-body">
+                                    You captured >50% of the murderers that's a beginning but it's not enough to impress
+                                    anyone in the court.
+                                    The Crown has many agents throughout the lands.
+                                    You must persevere in that way.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</center>
+</body>
+</html>
